@@ -26,7 +26,7 @@ namespace Angular_ASPNETCore.Controllers
             return Ok(await _repo.GetAllAsNoTracking().ToListAsync());
         }
 
-        // GET: api/Supplier/5
+        // GET: api/Produto/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduto([FromRoute] long id)
         {
@@ -45,7 +45,7 @@ namespace Angular_ASPNETCore.Controllers
             return Ok(Produto);
         }
 
-        // PUT: api/Supplier/5
+        // PUT: api/Produto/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduto([FromRoute] long id, [FromBody] Produto produto)
         {
@@ -81,7 +81,7 @@ namespace Angular_ASPNETCore.Controllers
             return NoContent();
         }
 
-        // POST: api/Supplier
+        // POST: api/Produto
         [HttpPost]
         public async Task<IActionResult> PostProduto([FromBody] Produto produto)
         {
@@ -93,10 +93,12 @@ namespace Angular_ASPNETCore.Controllers
             _repo.Add(produto);
             await _repo.SaveAsync(produto);
 
-            return CreatedAtAction("GetProduto", new { id = produto.Id }, produto);
+            return StatusCode(201, new { produtoResponse = produto });
+
+            //return CreatedAtAction("GetProduto", new { id = produto.Id }, produto);
         }
 
-        // DELETE: api/Supplier/5
+        // DELETE: api/Produto/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduto([FromRoute] long id)
         {

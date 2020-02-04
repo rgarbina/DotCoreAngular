@@ -28,11 +28,20 @@ import {
   MatFormFieldModule
 } from '@angular/material';
 
+import { ProdutoAddComponent } from './produto-add/produto-add.component';
+import { ProdutoEditComponent } from './produto-edit/produto-edit.component';
+import { ProdutoDetailComponent } from './produto-detail/produto-detail.component';
+import { NumericDirective } from "./numeric.directive";
+
+
 @NgModule({
   declarations: [
     AppComponent,
     ProdutoComponent,
-    LoginComponent
+    LoginComponent,
+    ProdutoAddComponent,
+    ProdutoEditComponent,
+    ProdutoDetailComponent
   ],
   imports: [
     BrowserModule,
