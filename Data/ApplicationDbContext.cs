@@ -6,8 +6,6 @@ namespace Angular_ASPNETCore.Data
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Imagem> Imagens { get; set; }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

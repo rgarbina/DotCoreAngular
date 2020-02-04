@@ -5,7 +5,34 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <Compile Remove="client\dist\**" />
+    <Compile Remove="client\out-tsc\**" />
+    <Content Remove="client\dist\**" />
+    <Content Remove="client\out-tsc\**" />
+    <EmbeddedResource Remove="client\dist\**" />
+    <EmbeddedResource Remove="client\out-tsc\**" />
+    <None Remove="client\dist\**" />
+    <None Remove="client\out-tsc\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200203201506_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200203201506_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200203201732_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200203201732_InitialCreate.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="client\src\app\interceptors\token.interceptor.ts" />
+    <None Remove="client\src\app\produto\produto.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="client\src\app\interceptors\token.interceptor.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.1">
@@ -26,7 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ApiExterna\" />
+    <TypeScriptCompile Include="client\src\app\produto\produto.ts" />
   </ItemGroup>
 
 

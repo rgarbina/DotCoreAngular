@@ -21,11 +21,9 @@ namespace Angular_ASPNETCore.Controllers
     {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
-        private readonly IMapper _mapper;
 
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
+        public AuthController(IAuthRepository repo, IConfiguration config)
         {
-            _mapper = mapper;
             _config = config;
             _repo = repo;
         }
@@ -56,7 +54,7 @@ namespace Angular_ASPNETCore.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return Ok(new { token = tokenHandler.WriteToken(token), email = loginDto.UserName, fullname = loginDto.UserName });
+            return Ok(new { token = tokenHandler.WriteToken(token), user = loginDto.UserName, fullname = loginDto.UserName });
         }
     }
 }
