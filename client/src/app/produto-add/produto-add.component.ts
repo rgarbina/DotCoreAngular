@@ -10,6 +10,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
   styleUrls: ['./produto-add.component.scss']
 })
 export class ProdutoAddComponent implements OnInit {
+  public response:"";
   produtoForm: FormGroup;
   imagemPath: '';
   nome: '';
@@ -32,9 +33,12 @@ export class ProdutoAddComponent implements OnInit {
   }
 
   onFormSubmit(form: NgForm) {
-    console.log(form);
-
     this.isLoadingResults = true;
+
+    form.imagemPath = this.response;
+    //console.log(this.response);
+    //const ctrl = new FormControl(this.response);
+    //this.produtoForm.addControl('imagemPath', ctrl);
     this.api.addProduto(form)
       .subscribe((res: { [x: string]: any; }) => {
         const produto = res['produtoResponse'];
@@ -45,6 +49,10 @@ export class ProdutoAddComponent implements OnInit {
         console.log(err);
         this.isLoadingResults = false;
       });
+  }
+
+  public uploadFinished = (event) => {
+    this.response = event;
   }
 }
 

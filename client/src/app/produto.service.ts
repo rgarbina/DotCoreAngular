@@ -52,7 +52,6 @@ export class ProdutoService {
   }
 
   addProduto(produto: any): Observable<Produto> {
-    console.log(JSON.stringify(produto));
     return this.http.post<Produto>(apiUrl, JSON.stringify(produto), httpOptions).pipe(
       tap((produtoRes: Produto) => console.log(`added Produto w/ id=${produtoRes.id}`)),
       catchError(this.handleError<Produto>('addProduto'))
@@ -60,9 +59,7 @@ export class ProdutoService {
   }
 
   updateProduto(id: number, produto: any): Observable<any> {
-    console.log(id);
     const url = `${apiUrl}/${id}`;
-    console.log(url);
     return this.http.put(url, JSON.stringify(produto), httpOptions).pipe(
       tap(_ => console.log(`updated Produto id=${id}`)),
       catchError(this.handleError<any>('updateProduto'))

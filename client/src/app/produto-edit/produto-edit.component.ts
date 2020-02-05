@@ -13,6 +13,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 
 export class ProdutoEditComponent implements OnInit {
   produtoForm: FormGroup;
+  public response: "";
   id: number = null;
   imagemPath: '';
   nome: '';
@@ -46,6 +47,10 @@ export class ProdutoEditComponent implements OnInit {
   }
 
   onFormSubmit(form: NgForm) {
+    if (this.response) {
+      form.imagemPath = this.response;
+    }
+
     this.isLoadingResults = true;
     this.api.updateProduto(this.id, form)
       .subscribe(res => {
@@ -56,6 +61,10 @@ export class ProdutoEditComponent implements OnInit {
         this.isLoadingResults = false;
       }
       );
+  }
+
+  public uploadFinished = (event) => {
+    this.response = event;
   }
 
   produtoDetails() {

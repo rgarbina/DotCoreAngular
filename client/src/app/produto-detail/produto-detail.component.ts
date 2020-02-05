@@ -33,6 +33,10 @@ export class ProdutoDetailComponent implements OnInit {
       });
   }
 
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44319/${serverPath}`;
+  }
+
   deleteProduto(id: number) {
     this.isLoadingResults = true;
     this.produtoService.deleteProduto(id)

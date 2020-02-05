@@ -14,10 +14,11 @@
       <dl>
         <dt>Nome:</dt>
         <dd>{{produto.nome}}</dd>
-        <dt>Imagem:</dt>
-        <dd>{{produto.imagemPath}}</dd>
         <dt>Valor:</dt>
         <dd>{{produto.valor}}</dd>
+        <dt>Imagem:</dt>
+        <dd>{{produto.imagemPath}}</dd>
+        <dd><img [src]="createImgPath(row.imagemPath)" alt="imagem produto" style="width:60px; height:60px;"></dd>
       </dl>
     </mat-card-content>
     <mat-card-actions>

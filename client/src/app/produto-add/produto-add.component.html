@@ -8,13 +8,6 @@
   </div>
   <mat-card class="example-card">
     <form [formGroup]="produtoForm" (ngSubmit)="onFormSubmit(produtoForm.value)">
-      <!--<mat-form-field class="example-full-width">
-        <input matInput placeholder="Company Name" formControlName="companyName"
-               [errorStateMatcher]="matcher">
-        <mat-error>
-          <span *ngIf="!produtoForm.get('companyName').valid && produtoForm.get('companyName').touched">Please enter Company Name</span>
-        </mat-error>
-      </mat-form-field>-->
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Nome" formControlName="nome"
                [errorStateMatcher]="matcher">
@@ -23,10 +16,7 @@
         <input type="number" matInput numeric decimals="2" placeholder="Valor" formControlName="valor"
                [errorStateMatcher]="matcher">
       </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Imagem" formControlName="imagemPath"
-               [errorStateMatcher]="matcher">
-      </mat-form-field>
+      <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
       <div class="button-row">
         <button type="submit" [disabled]="!produtoForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
       </div>

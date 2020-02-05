@@ -32,6 +32,7 @@ import { ProdutoAddComponent } from './produto-add/produto-add.component';
 import { ProdutoEditComponent } from './produto-edit/produto-edit.component';
 import { ProdutoDetailComponent } from './produto-detail/produto-detail.component';
 import { NumericDirective } from "./numeric.directive";
+import { UploadComponent } from './upload/upload.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { NumericDirective } from "./numeric.directive";
     LoginComponent,
     ProdutoAddComponent,
     ProdutoEditComponent,
-    ProdutoDetailComponent
+    ProdutoDetailComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

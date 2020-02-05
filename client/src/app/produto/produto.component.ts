@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class ProdutoComponent implements OnInit {
 
   data: Produto[] = [];
-  displayedColumns: string[] = ['nome', 'valor', 'imagemPath'];
+  displayedColumns: string[] = ['nome', 'valor', 'imagemPath','detalhe'];
   isLoadingResults = true;
 
   constructor(private produtoService: ProdutoService, private authService: AuthService, private router: Router) { }
@@ -32,6 +32,10 @@ export class ProdutoComponent implements OnInit {
         console.log(err);
         this.isLoadingResults = false;
       });
+  }
+
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44319/${serverPath}`;
   }
 
   logout() {
