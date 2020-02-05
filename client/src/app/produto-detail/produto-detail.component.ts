@@ -28,13 +28,8 @@ export class ProdutoDetailComponent implements OnInit {
     this.produtoService.getProduto(id)
       .subscribe(data => {
         this.produto = data;
-        console.log(this.produto);
         this.isLoadingResults = false;
       });
-  }
-
-  public createImgPath = (serverPath: string) => {
-    return `https://localhost:44319/${serverPath}`;
   }
 
   deleteProduto(id: number) {

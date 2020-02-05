@@ -17,8 +17,9 @@
         <dt>Valor:</dt>
         <dd>{{produto.valor}}</dd>
         <dt>Imagem:</dt>
-        <dd>{{produto.imagemPath}}</dd>
-        <dd><img [src]="createImgPath(row.imagemPath)" alt="imagem produto" style="width:60px; height:60px;"></dd>
+        <dd>
+          <img src="\assets\img\{{produto.imagemPath}}" alt="imagem produto" style="width:180px; height:180px;">
+        </dd>
       </dl>
     </mat-card-content>
     <mat-card-actions>

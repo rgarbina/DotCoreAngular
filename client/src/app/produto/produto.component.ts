@@ -35,7 +35,7 @@ export class ProdutoComponent implements OnInit {
   }
 
   public createImgPath = (serverPath: string) => {
-    return `https://localhost:44319/${serverPath}`;
+    return `\\assets\\img\\${serverPath}`;
   }
 
   logout() {

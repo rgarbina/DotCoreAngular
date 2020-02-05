@@ -7,12 +7,16 @@
   <ItemGroup>
     <Compile Remove="client\dist\**" />
     <Compile Remove="client\out-tsc\**" />
+    <Compile Remove="client\src\assets\img\**" />
     <Content Remove="client\dist\**" />
     <Content Remove="client\out-tsc\**" />
+    <Content Remove="client\src\assets\img\**" />
     <EmbeddedResource Remove="client\dist\**" />
     <EmbeddedResource Remove="client\out-tsc\**" />
+    <EmbeddedResource Remove="client\src\assets\img\**" />
     <None Remove="client\dist\**" />
     <None Remove="client\out-tsc\**" />
+    <None Remove="client\src\assets\img\**" />
   </ItemGroup>
 
   <ItemGroup>

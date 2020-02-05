@@ -48,7 +48,7 @@ export class ProdutoEditComponent implements OnInit {
 
   onFormSubmit(form: NgForm) {
     if (this.response) {
-      form.imagemPath = this.response;
+      this.produtoForm.value.imagemPath = this.response;
     }
 
     this.isLoadingResults = true;

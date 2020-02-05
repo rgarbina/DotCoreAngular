@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System;
 using System.Text;
+using Angular_ASPNETCore.DTO;
 
 namespace Angular_ASPNETCore.Repositories
 {
@@ -12,46 +13,30 @@ namespace Angular_ASPNETCore.Repositories
         public async Task<bool> Login(string username, string password)
         {
             string apiURL = "https://dev.sitemercado.com.br/api/login";
-            bool returno = false;
-            using (var client = new HttpClient())
+            bool retorno = false;
+            try
             {
-                client.BaseAddress = new Uri("https://dev.sitemercado.com.br/api");
-
-                //HTTP POST
-                var postTask = client.PostAsJsonAsync("login", new { username, password });
-                postTask.Wait();
-
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
+                using (var httpClient = new HttpClient())
                 {
-                    returno = true;
+                    var byteArray = Encoding.UTF8.GetBytes(string.Format("{0}:{1}", username, password));
+                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                    var jObject = JsonConvert.SerializeObject(new { username, password });
+                    StringContent content = new StringContent("", Encoding.UTF8, "application/json");
+
+                    using (var response = await httpClient.PostAsync(apiURL, content))
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        var receivedResponse = JsonConvert.DeserializeObject<ApiLoginReponseDto>(apiResponse);
+
+                        retorno = receivedResponse.success;
+                    }
                 }
             }
-
-            using (var httpClient = new HttpClient())
+            catch (Exception)
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(new { username, password }), Encoding.UTF8, "application/json");
-
-                using (var response = await httpClient.PostAsync(apiURL, content))
-                {
-                    //string apiResponse = await response.Content.ReadAsStringAsync();
-                    //receivedReservation = JsonConvert.DeserializeObject<Reservation>(apiResponse);
-
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    dynamic resultado = JsonConvert.DeserializeObject(apiResponse);
-                }
             }
 
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(apiURL))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    dynamic resultado = JsonConvert.DeserializeObject(apiResponse);
-                }
-            }
-
-            return returno;
+            return retorno;
         }
     }
 }

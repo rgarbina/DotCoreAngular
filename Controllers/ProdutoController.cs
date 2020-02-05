@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Angular_ASPNETCore.Data;
 using Angular_ASPNETCore.Repositories;
 using ASPNETCore_Angular.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Angular_ASPNETCore.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProdutoController : ControllerBase
@@ -165,8 +166,7 @@ namespace Angular_ASPNETCore.Controllers
                 fileName = Guid.NewGuid().ToString();
             }
 
-            var folderName = Path.Combine("StaticFiles", "Images");
-
+            var folderName = Path.Combine(@"client\", @"src\assets\img");
             if (!Directory.Exists(folderName))
             {
                 Directory.CreateDirectory(folderName);
@@ -177,13 +177,12 @@ namespace Angular_ASPNETCore.Controllers
             if (bytes.Length > 0)
             {
                 var fullPath = Path.Combine(pathToSave + "\\" + fileName);
-                dbPath = Path.Combine(folderName + "\\" + fileName);
 
                 using (var stream = new FileStream(fullPath + ".jpg", FileMode.Create))
                 {
                     stream.Write(bytes, 0, bytes.Length);
                     stream.Flush();
-                    dbPath = Path.Combine(folderName, fileName);
+                    dbPath =  fileName + ".jpg";
                 }
                 return dbPath;
             }

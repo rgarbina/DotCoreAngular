@@ -29,24 +29,25 @@ namespace Angular_ASPNETCore
         {
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>();
-            //services.AddCors();
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddJwtBearer(options =>
-            //      {
-            //          options.TokenValidationParameters = new TokenValidationParameters
-            //          {
-            //              ValidateIssuerSigningKey = true,
-            //              IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-            //                  .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-            //              ValidateIssuer = false,
-            //              ValidateAudience = false
-            //          };
-            //      });
-            //services.Configure<FormOptions>(o => {
-            //    o.ValueLengthLimit = int.MaxValue;
-            //    o.MultipartBodyLengthLimit = int.MaxValue;
-            //    o.MemoryBufferThreshold = int.MaxValue;
-            //});
+            services.AddCors();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                  {
+                      options.TokenValidationParameters = new TokenValidationParameters
+                      {
+                          ValidateIssuerSigningKey = true,
+                          IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                              .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                          ValidateIssuer = false,
+                          ValidateAudience = false
+                      };
+                  });
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
 
             #region Injection
             services.AddScoped<IAuthRepository, AuthRepository>();
@@ -66,15 +67,12 @@ namespace Angular_ASPNETCore
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            //app.UseAuthorization();
-
+            app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseAuthentication();
+            app.UseRouting();
+            app.UseAuthorization();
 
-            //app.UseAuthentication();
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {

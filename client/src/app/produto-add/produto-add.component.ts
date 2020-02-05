@@ -34,11 +34,9 @@ export class ProdutoAddComponent implements OnInit {
 
   onFormSubmit(form: NgForm) {
     this.isLoadingResults = true;
-
-    form.imagemPath = this.response;
-    //console.log(this.response);
-    //const ctrl = new FormControl(this.response);
-    //this.produtoForm.addControl('imagemPath', ctrl);
+    this.produtoForm.value.imagemPath = this.response;
+    const ctrl = new FormControl(this.response);
+    this.produtoForm.addControl('imagemPath', ctrl);
     this.api.addProduto(form)
       .subscribe((res: { [x: string]: any; }) => {
         const produto = res['produtoResponse'];
